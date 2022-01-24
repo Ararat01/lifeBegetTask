@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import {map , catchError, tap, debounceTime, distinctUntilChanged, switchMap, mergeMap, filter} from 'rxjs/operators';
+import {map , catchError } from 'rxjs/operators';
 import {ajax} from 'rxjs/ajax'
-import { EMPTY, of, fromEvent } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { iproduct } from './../iproduct';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-products-view',
@@ -19,8 +18,6 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
     to: 10000
   })
 
-  from = this.range.value["from"];
-  to = this.range.value["to"];
 
   hasresult: Boolean = false;
   products: Array<iproduct> = [];
@@ -38,10 +35,8 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
 
   search() {
     this.hasresult = false
-    this.from = this.range.value["from"]
-    this.to = this.range.value["to"]
     this.productsFiltered = this.products.filter((v:iproduct) => {
-      return v.productPrice >= this.from && v.productPrice <= this.to
+      return v.productPrice >= this.range.value["from"] && v.productPrice <= this.range.value["to"]
     })
     setTimeout(()=>{
       this.hasresult = true
@@ -51,7 +46,7 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
 
   productsRequest() {
     if ((document.getElementById('result') as HTMLElement)) {
-      (document.getElementById('result') as HTMLElement).innerHTML = ''
+      (document.getElementById('result') as HTMLElement).innerHTML = '';
     }
     const obs$ = ajax(`assets/shopproducts.json`).pipe(
       map(userResponse => userResponse.response),
