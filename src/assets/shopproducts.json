@@ -2,42 +2,112 @@
     {
         "productId": 1,
         "productName": "Phone",
-        "productPrice": 1000,
-        "createdAt": "2012-04-23T18:25:43.511Z",
+        "productPrice": 100,
+        "createdAt": 123,
         "updatedAt": "2012-04-23T18:25:43.511Z"
     },
     {
         "productId": 2,
         "productName": "Mouse",
-        "productPrice": 100,
+        "productPrice": 500,
         "createdAt": "2012-04-23T18:25:43.511Z",
         "updatedAt": "2012-04-23T18:25:43.511Z"
     },
     {
-        "productId": 2,
-        "productName": "Mouse",
-        "productPrice": 100,
+        "productId": 3,
+        "productName": "Keyboard",
+        "productPrice": 600,
         "createdAt": "2012-04-23T18:25:43.511Z",
         "updatedAt": "2012-04-23T18:25:43.511Z"
     },
     {
-        "productId": 2,
-        "productName": "Mouse",
-        "productPrice": 100,
+        "productId": 4,
+        "productName": "Monitor",
+        "productPrice": 700,
         "createdAt": "2012-04-23T18:25:43.511Z",
         "updatedAt": "2012-04-23T18:25:43.511Z"
     },
     {
-        "productId": 2,
-        "productName": "Mouse",
-        "productPrice": 100,
+        "productId": 5,
+        "productName": "Phone",
+        "productPrice": 900,
         "createdAt": "2012-04-23T18:25:43.511Z",
         "updatedAt": "2012-04-23T18:25:43.511Z"
     },
     {
-        "productId": 2,
-        "productName": "Mouse",
-        "productPrice": 100,
+        "productId":6,
+        "productName": "Phone",
+        "productPrice": 1100,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 7,
+        "productName": "Phone",
+        "productPrice": 650,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 8,
+        "productName": "Phone",
+        "productPrice": 9000,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 9,
+        "productName": "Phone",
+        "productPrice": 50,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 10,
+        "productName": "Phone",
+        "productPrice": 450,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 11,
+        "productName": "Phone",
+        "productPrice": 1300,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 12,
+        "productName": "Phone",
+        "productPrice": 160,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 13,
+        "productName": "Phone",
+        "productPrice": 290,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 14,
+        "productName": "Phone",
+        "productPrice": 370,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 15,
+        "productName": "Phone",
+        "productPrice": 1500,
+        "createdAt": "2012-04-23T18:25:43.511Z",
+        "updatedAt": "2012-04-23T18:25:43.511Z"
+    },
+    {
+        "productId": 16,
+        "productName": "Phone",
+        "productPrice": 680 ,
         "createdAt": "2012-04-23T18:25:43.511Z",
         "updatedAt": "2012-04-23T18:25:43.511Z"
     }

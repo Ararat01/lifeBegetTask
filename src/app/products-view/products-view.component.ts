@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {map , catchError, tap} from 'rxjs/operators';
+import {map , catchError, tap, debounceTime, distinctUntilChanged, switchMap, mergeMap, filter} from 'rxjs/operators';
 import {ajax} from 'rxjs/ajax'
-import { EMPTY, of } from 'rxjs';
+import { EMPTY, of, fromEvent } from 'rxjs';
 import { iproduct } from './../iproduct';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-products-view',
@@ -11,26 +13,47 @@ import { iproduct } from './../iproduct';
 })
 export class ProductsViewComponent implements OnInit {
 
-  constructor() { }
+
+  range = this.fb.group({
+    from: 0,
+    to: 10000
+  })
+
+  from = this.range.value["from"];
+  to = this.range.value["to"];
+
+  hasresult: Boolean = false;
+
+  loadTime = 2000
+
+  constructor(public fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.productsRequest()
   }
 
-  hasresult: Boolean = false;
+  search() {
+    (document.querySelector('.container') as HTMLElement).style.display = 'none';
+    this.hasresult = false
+    this.from = this.range.value["from"]
+    this.to = this.range.value["to"]
+    this.productsRequest()
+  }
+
 
   productsRequest() {
+    (document.getElementById('result') as HTMLElement).innerHTML = ''
     const obs$ = ajax(`assets/shopproducts.json`).pipe(
       map(userResponse => userResponse.response),
       catchError(error => {
-        console.log('error: ', error);
         return of(error);
       })
     )
     .subscribe((value) => {
-      console.log(value)
+      value = value.filter((v:iproduct) => {
+        return v.productPrice >= this.from && v.productPrice <= this.to
+      })
       for(let i in value) {
-        console.log(value[i]);
         const product: iproduct = value[i]
         const html = `
           <div class="product">
@@ -49,10 +72,12 @@ export class ProductsViewComponent implements OnInit {
     err => EMPTY,
     () => {
       setTimeout(() => {
+        (document.querySelector('.container') as HTMLElement).style.display = 'block';
         (document.getElementById('result') as HTMLElement).style.display = 'flex';
         console.log("finished");
         this.hasresult = true
-      }, 2500)
+      }, this.loadTime)
+      this.loadTime = 500
     }
     )
   }

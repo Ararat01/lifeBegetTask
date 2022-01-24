@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 78px);
 }
   
 .loader {
@@ -42,6 +42,7 @@
 .container {
     width: 90%;
     margin: 0 auto;
+    display: none;
 }
 
 #result {
@@ -75,5 +76,14 @@
             display: block;
             font-size: 1rem;
         }
+    }
+}
+
+.filter {
+    input, button {
+        border: 1px solid;
+        border-radius: 25px;
+        padding: 5px;
+        background-color: transparent;
     }
 }
