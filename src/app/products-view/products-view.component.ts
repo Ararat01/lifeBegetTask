@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {map , catchError, tap, debounceTime, distinctUntilChanged, switchMap, mergeMap, filter} from 'rxjs/operators';
 import {ajax} from 'rxjs/ajax'
 import { EMPTY, of, fromEvent } from 'rxjs';
@@ -11,7 +11,7 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
   templateUrl: './products-view.component.html',
   styleUrls: ['./products-view.component.scss']
 })
-export class ProductsViewComponent implements OnInit {
+export class ProductsViewComponent implements OnInit, AfterViewInit {
 
 
   range = this.fb.group({
@@ -23,12 +23,17 @@ export class ProductsViewComponent implements OnInit {
   to = this.range.value["to"];
 
   hasresult: Boolean = false;
+  products: Array<any> = [];
 
-  loadTime = 2000
+  loadTime = 3000
 
   constructor(public fb: FormBuilder) { }
 
   ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit() {
     this.productsRequest()
   }
 
@@ -42,7 +47,9 @@ export class ProductsViewComponent implements OnInit {
 
 
   productsRequest() {
-    (document.getElementById('result') as HTMLElement).innerHTML = ''
+    if ((document.getElementById('result') as HTMLElement)) {
+      (document.getElementById('result') as HTMLElement).innerHTML = ''
+    }
     const obs$ = ajax(`assets/shopproducts.json`).pipe(
       map(userResponse => userResponse.response),
       catchError(error => {
@@ -50,7 +57,7 @@ export class ProductsViewComponent implements OnInit {
       })
     )
     .subscribe((value) => {
-      value = value.filter((v:iproduct) => {
+      this.products = value.filter((v:iproduct) => {
         return v.productPrice >= this.from && v.productPrice <= this.to
       })
       for(let i in value) {
