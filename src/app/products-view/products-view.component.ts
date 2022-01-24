@@ -23,9 +23,8 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
   to = this.range.value["to"];
 
   hasresult: Boolean = false;
-  products: Array<any> = [];
-
-  loadTime = 3000
+  products: Array<iproduct> = [];
+  productsFiltered: Array<iproduct> = [];
 
   constructor(public fb: FormBuilder) { }
 
@@ -38,11 +37,15 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-    (document.querySelector('.container') as HTMLElement).style.display = 'none';
     this.hasresult = false
     this.from = this.range.value["from"]
     this.to = this.range.value["to"]
-    this.productsRequest()
+    this.productsFiltered = this.products.filter((v:iproduct) => {
+      return v.productPrice >= this.from && v.productPrice <= this.to
+    })
+    setTimeout(()=>{
+      this.hasresult = true
+    }, 500)
   }
 
 
@@ -57,34 +60,15 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
       })
     )
     .subscribe((value) => {
-      this.products = value.filter((v:iproduct) => {
-        return v.productPrice >= this.from && v.productPrice <= this.to
-      })
-      for(let i in value) {
-        const product: iproduct = value[i]
-        const html = `
-          <div class="product">
-              <div class="product__img">
-                  <img width="100%" src="https://cdn1.vectorstock.com/i/1000x1000/79/10/product-icon-simple-element-vector-27077910.jpg" alt="">
-              </div>
-              <h2 class="product__name">${product.productName}</h2>
-              <p  class="product__price">${product.productPrice}$</p>
-              <em  class="product__date product__date_create">${product.createdAt}</em>
-              <em class="product__date product__date_update">${product.updatedAt}</em>
-          </div>
-        `
-        document.getElementById('result')?.insertAdjacentHTML('beforeend', html)
-      }
+      this.products = value
+      this.productsFiltered = value
     },
     err => EMPTY,
     () => {
       setTimeout(() => {
-        (document.querySelector('.container') as HTMLElement).style.display = 'block';
-        (document.getElementById('result') as HTMLElement).style.display = 'flex';
         console.log("finished");
         this.hasresult = true
-      }, this.loadTime)
-      this.loadTime = 500
+      }, 3000)
     }
     )
   }

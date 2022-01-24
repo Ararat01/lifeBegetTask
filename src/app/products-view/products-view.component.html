@@ -16,8 +16,16 @@
             <input type="number" formControlName="to" placeholder="to">
             <button>Search</button>
         </form>
-
     </div>
     <div id="result">
+        <div class="product" *ngFor="let product of productsFiltered">
+            <div class="product__img">
+                <img width="100%" src="assets/product.png" alt="No image">
+            </div>
+            <h2 class="product__name">{{product.productName}}</h2>
+            <p  class="product__price">{{product.productPrice}}</p>
+            <em  class="product__date product__date_create">{{product.createdAt}}</em>
+            <em class="product__date product__date_update">{{product.updatedAt}}</em>
+        </div>
     </div>
 </div>
