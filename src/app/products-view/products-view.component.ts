@@ -37,7 +37,7 @@ export class ProductsViewComponent implements OnInit, AfterViewInit {
     this.hasresult = false
     this.productsFiltered = this.products.filter((v:iproduct) => {
       return v.productPrice >= this.range.value["from"] && v.productPrice <= this.range.value["to"]
-    })
+    }).sort((a, b) => a.productPrice - b.productPrice)
     setTimeout(()=>{
       this.hasresult = true
     }, 500)
